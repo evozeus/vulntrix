@@ -1,0 +1,38 @@
+[package]
+name = "vulntrix"
+version = "0.1.0"
+edition = "2021"
+authors = ["Evozeus <43null_hatches@icloud.com>"]
+description = "An asynchronous CVE and exposure intelligence tool — safe, legal, and insight-driven reconnaissance."
+repository = "https://github.com/evozeus/vulntrix"
+license = "MIT"
+keywords = ["vulnerability", "cve", "osv", "security", "cli"]
+categories = ["command-line-utilities", "network-programming", "development-tools"]
+readme = "README.md"
+rust-version = "1.74"
+exclude = [".github/", "target/", ".vscode/", ".idea/"]
+
+[[bin]]
+name = "vulntrix"
+path = "src/main.rs"
+
+[dependencies]
+clap = { version = "4.5", features = ["derive"] }
+reqwest = { version = "0.12", features = ["json", "gzip", "brotli", "deflate", "http2", "rustls-tls"] }
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+colored = "2.1"
+futures = "0.3"
+anyhow = "1"
+indicatif = "0.17"
+dirs = "5"
+itertools = "0.13"
+
+[dev-dependencies]
+assert_cmd = "2"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+opt-level = 3
